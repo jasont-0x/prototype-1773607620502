@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "How old is your baby?" },
+        value: { text: data["baby-age"] if data["baby-age"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/baby-age",
+            text: "Change",
+            visuallyHiddenText: "how old is your baby?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your baby's favourite film?" },
+        value: { text: data["favourite-film"] if data["favourite-film"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/favourite-film",
+            text: "Change",
+            visuallyHiddenText: "what is your baby's favourite film?"
+          }]
+        }
+      },
+      {
+        key: { text: "Which character from the film does your baby like best?" },
+        value: { text: data["film-character"] if data["film-character"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/film-character",
+            text: "Change",
+            visuallyHiddenText: "which character from the film does your baby like best?"
+          }]
+        }
+      },
+      {
+        key: { text: "How big do you want the teddy bear?" },
+        value: { text: data["teddy-size"] if data["teddy-size"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/teddy-size",
+            text: "Change",
+            visuallyHiddenText: "how big do you want the teddy bear?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your baby's name?" },
+        value: { text: data["baby-name"] if data["baby-name"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/baby-name",
+            text: "Change",
+            visuallyHiddenText: "what is your baby's name?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
