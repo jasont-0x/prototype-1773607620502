@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your baby's name?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["baby-name"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["baby-name"], href: "#baby-name" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "baby-name",
+      name: "baby-name",
+      label: {
+        text: "What is your baby's name?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "We will put this on a label on the teddy bear." },
+      errorMessage: errors["baby-name"] if errors else null,
+      value: data["baby-name"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
