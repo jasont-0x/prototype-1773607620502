@@ -1,0 +1,10 @@
+{
+  "serviceName": "Get a film teddy bear for your baby",
+  "serviceUrl": "/start",
+  "useAuth": false,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
