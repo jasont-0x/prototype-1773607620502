@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "How big do you want the teddy bear?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["teddy-size"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["teddy-size"], href: "#teddy-size" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "teddy-size",
+      fieldset: {
+        legend: {
+          text: "How big do you want the teddy bear?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["teddy-size"] if errors else null,
+      value: data["teddy-size"],
+      items: [
+        { value: "small", text: "Small - fits in baby's hands" },
+        { value: "medium", text: "Medium - as big as baby's head" },
+        { value: "big", text: "Big - as big as baby" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
