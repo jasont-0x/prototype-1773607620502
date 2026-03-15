@@ -1,0 +1,36 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your baby's favourite film?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["favourite-film"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["favourite-film"], href: "#favourite-film" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukInput({
+      id: "favourite-film",
+      name: "favourite-film",
+      label: {
+        text: "What is your baby's favourite film?",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "Like Frozen, Toy Story, or The Lion King." },
+      errorMessage: errors["favourite-film"] if errors else null,
+      value: data["favourite-film"]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
